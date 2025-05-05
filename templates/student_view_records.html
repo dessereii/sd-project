@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Quiz Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #dbe9f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .table-container {
+            background: rgb(239, 226, 226);
+            padding: 30px;
+            max-width: 800px;
+            margin: 100px auto;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(213, 208, 208, 0.1);
+            text-align: center;
+            overflow-x: auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #875f3e;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .bottom-buttons {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .bottom-buttons-left,
+        .bottom-buttons-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bottom-buttons a {
+            padding: 10px 20px;
+            background-color: #875f3e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .bottom-buttons a:hover {
+            background-color: #a86c3a;
+        }
+
+        .no-records {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h1>My Quiz Records</h1>
+
+        {% if records %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Quiz Title</th>
+                    <th>Date Taken</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.quiz_title }}</td>
+                    <td>{{ record.date_taken }}</td>
+                    <td>{{ record.score }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="no-records">No quiz records found.</div>
+        {% endif %}
+    </div>
+
+    <div class="bottom-buttons">
+        <div class="bottom-buttons-left">
+            <a href="{{ url_for('student_home') }}">Back to Home</a>
+        </div>
+        <div class="bottom-buttons-right">
+            <a href="{{ url_for('export_csv') }}">Download CSV</a>
+            <a href="{{ url_for('export_pdf') }}">Export PDF</a>
+        </div>
+    </div>
+</body>
+</html>

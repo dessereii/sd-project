@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Records</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #eee;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz Records</h1>
+    <table>
+        <tr>
+            <th>Student ID</th>
+            <th>Date</th>
+            <th>Partial Score (MCQ)</th>
+            <th>Total Score</th>
+        </tr>
+        {% for r in records %}
+        <tr>
+            <td>{{ r.student_id }}</td>
+            <td>{{ r.submission_date }}</td>
+            <td>{{ r.partial_score }}</td>
+            <td>{{ r.total_score }}</td>
+        </tr>
+                {% if record.graded %}
+                    {% if record.is_correct %}
+                        <span class="correct">✔ {{ record.score }}</span>
+                    {% else %}
+                        <span class="incorrect">✘ {{ record.score }}</span>
+                    {% endif %}
+                {% else %}
+                    {{ record.score }}
+                {% endif %}
+            </td>
+            <td>{{ 'Yes' if record.graded else 'No' }}</td>
+            <td>
+                {% if not record.graded %}
+                <form method="POST" action="{{ url_for('grade_answer') }}">
+                    <input type="hidden" name="score_id" value="{{ record.id }}">
+                    <input type="number" name="score" min="0" max="5" required>
+                    <button type="submit">Grade</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

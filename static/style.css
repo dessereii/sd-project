@@ -1,0 +1,284 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    padding-right: 50px;
+}
+
+.form-box {
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 500px; 
+}
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #7b6039;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #5a4429;
+}
+
+/* Admin home page buttons */
+.button-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 80px;
+}
+
+.button-row form {
+    flex: 1;
+    min-width: 120px;
+}
+
+.button-row button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #7b6039;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.button-row button:hover {
+    background-color: #5a4429;
+}
+
+/* Manage Quiz page */
+.quiz-management {
+    margin: 40px auto;
+    text-align: center;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+.quiz-management h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #4b0082;
+}
+
+.quiz-management .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.quiz-management .button {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #7b6039;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    width: 80%;
+    text-align: center;
+}
+
+.quiz-management .button:hover {
+    background-color: #7b6039;
+}
+
+/* Logout and Back to Home positioning */
+.logout-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.logout-button button {
+    background-color: #7b6039;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.logout-button button:hover {
+    background-color: #5a4429;
+}
+
+.back-button {
+    position: absolute;
+    bottom: 70px;
+    left: 50px;
+}
+
+.back-button a.button {
+    background-color: #7b6039;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+}
+
+.back-button a.button:hover {
+    background-color: #5a4429;
+}
+.quiz-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    margin: 100px auto;
+    width: 400px;
+}
+.quiz-button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #8B5E3C;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+}
+.back-home-button, .export-button {
+    padding: 10px 40px;
+    background-color: #8B5E3C;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+/* styudent */
+.bottom-buttons {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.btn-custom {
+    background-color: #8B5E3C;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap; 
+}
+
+.btn-custom:hover {
+    background-color: #71472c;
+}
+.button-row {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+/* students home buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 100px;
+    margin-bottom: -100px;
+    flex-wrap: wrap;
+}
+
+.button-style {
+    background-color: #8B5E3C;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.button-style:hover {
+    background-color: #A97456;
+}
+
+.logout {
+    display: block;
+    margin: 30px auto 0;
+    background-color: #8B5E3C;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
+.logout:hover {
+    background-color: #A97456;
+}
+/* export admin*/
+.back-home {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.export-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}

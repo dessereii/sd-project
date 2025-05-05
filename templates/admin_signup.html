@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Sign Up</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .horizontal-inputs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .horizontal-inputs input {
+            flex: 1 1 45%;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        .form-box small {
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .signup-btn {
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .signup-btn:hover {
+            background-color: #5a4429;
+        }
+
+        .form-box a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #7b6039;
+        }
+
+        .form-box a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <form method="POST" class="form-box">
+            <h1>Administrator Registration</h1>
+            <p>Only authorized personnel can register.</p>
+
+            <div class="horizontal-inputs">
+                <input type="text" name="full_name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+
+            <button type="submit" class="signup-btn">Register as Administrator</button>
+
+            <p>Already have an account? <a href="{{ url_for('admin_login') }}">Log in here</a></p>
+            <a href="{{ url_for('home') }}">Back to Role Selection</a>
+        </form>
+    </div>
+</body>
+</html>

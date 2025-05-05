@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h1>Manage Attendance Records</h1>
+
+
+            <form method="POST" action="{{ url_for('add_student') }}">
+                <input type="text" name="name" placeholder="Student Name" required>
+                <input type="text" name="attendance" placeholder="Attendance (e.g. Present/Absent)" required>
+                <input type="number" name="quiz_score" placeholder="Quiz Score" required>
+                <input type="number" name="exam_score" placeholder="Exam Score" required>
+                <button type="submit">Add Student</button>
+            </form>
+
+            {% if records %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Attendance</th>
+                        <th>Quiz Score</th>
+                        <th>Exam Score</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in records %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.attendance }}</td>
+                        <td>{{ student.quiz_score }}</td>
+                        <td>{{ student.exam_score }}</td>
+                        <td>
+                            <a href="{{ url_for('edit', student_id=student.id) }}">Edit</a> |
+                            <a href="{{ url_for('delete', student_id=student.id) }}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No student records yet.</p>
+            {% endif %}
+
+
+<form action="{{ url_for('admin_home') }}" method="get" style="margin-bottom: 20px;">
+
+<div style="
+position: fixed;
+bottom: 20px;
+left: 20px;
+">
+<form action="{{ url_for('admin_home') }}" method="get">
+    <button type="submit" style="
+        background-color: #7b6039;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+    ">← Back to Home</button>
+</form>
+
+<div style="
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+">
+    <form action="{{ url_for('admin_logout') }}" method="get">
+        <button type="submit" style="
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+        ">Logout</button>
+    </form>
+</div>
+</div>
+
+
+        </div>
+    </div>
+</body>
+</html>

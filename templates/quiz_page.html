@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  
+    <div class="quiz-container">
+        <h2>Manage Quiz</h2>
+        <a href="{{ url_for('create_quiz') }}" class="quiz-button">Create Quiz</a>
+        <a href="{{ url_for('assign_quiz') }}" class="quiz-button">Assign Quiz</a>
+        <a href="{{ url_for('view_records') }}" class="quiz-button">View Records</a>
+        
+    </div>
+
+   
+<div class="back-home">
+    <a href="{{ url_for('admin_home') }}" class="btn-custom">Back to Home</a>
+</div>
+
+
+<div class="export-buttons">
+    <a href="/export?type=csv" class="btn-custom">Export CSV</a>
+    <a href="/export?type=pdf" class="btn-custom">Export PDF</a>
+</div>
+       
+    
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #dce7f5;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        .quiz-form-container {
+            background-color: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 700px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .question-block {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        label {
+            font-weight: 500;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: #6c4f3d;
+            color: white;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #593f2f;
+        }
+
+        #button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-form-container">
+        <h2>Create a Quiz</h2>
+        <form method="POST" action="/create_quiz">
+            <div id="questions-container">
+                <!-- Question blocks will be added here -->
+            </div>
+
+            <div id="button-container">
+                <button type="button" onclick="addQuestion()">Add Question</button>
+                <button type="submit">Submit Quiz</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        let questionCount = 0;
+        const maxQuestions = 30;
+
+        function addQuestion() {
+            if (questionCount >= maxQuestions) {
+                alert("Maximum of 30 questions allowed.");
+                return;
+            }
+
+            const container = document.getElementById('questions-container');
+            const block = document.createElement('div');
+            block.className = 'question-block';
+
+            block.innerHTML = `
+                <label>Question ${questionCount + 1}:</label><br>
+                <input type="text" name="question_text_${questionCount}" placeholder="Question Text" required><br>
+
+                <label>Question Type:</label><br>
+                <select name="question_type_${questionCount}" onchange="toggleOptions(this, ${questionCount})" required>
+                    <option value="">-- Select Type --</option>
+                    <option value="mcq">Multiple Choice</option>
+                    <option value="short_answer">Short Answer</option>
+                </select><br>
+
+                <div id="options_${questionCount}" style="display: none;">
+                    <label>Options (comma-separated):</label><br>
+                    <input type="text" name="options_${questionCount}" placeholder="e.g. A,B,C,D"><br>
+                </div>
+
+                <label>Correct Answer:</label><br>
+                <input type="text" name="correct_answer_${questionCount}" placeholder="Correct Answer" required><br>
+            `;
+
+            container.appendChild(block);
+            questionCount++;
+        }
+
+        function toggleOptions(selectElement, count) {
+            const optionDiv = document.getElementById(`options_${count}`);
+            if (selectElement.value === 'mcq') {
+                optionDiv.style.display = 'block';
+            } else {
+                optionDiv.style.display = 'none';
+            }
+        }
+
+        // Add first question by default
+        window.onload = () => addQuestion();
+    </script>
+</body>
+</html>

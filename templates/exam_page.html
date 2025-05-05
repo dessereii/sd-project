@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Exams</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .exam-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 30px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .exam-button {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .exam-button:hover {
+            background-color: #0056b3;
+        }
+
+        .back-home {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .export-buttons {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-custom {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: white;
+            background-color: #28a745;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <div class="exam-container">
+        <h2>Manage Exams</h2>
+        <a href="{{ url_for('create_exam') }}" class="exam-button">Create Exam</a>
+        <a href="{{ url_for('view_exam_records') }}" class="exam-button">View Exam Records</a>
+        <a href="{{ url_for('schedule_exam') }}" class="exam-button">Schedule Exam</a>
+        <a href="{{ url_for('view_scheduled_exams') }}" class="exam-button">View Scheduled Exams</a>
+    </div>
+
+    <div class="back-home">
+        <a href="{{ url_for('admin_home') }}" class="btn-custom">Back to Home</a>
+    </div>
+
+    <div class="export-buttons">
+        <a href="/export_exams?type=csv" class="btn-custom">Export CSV</a>
+        <a href="/export_exams?type=pdf" class="btn-custom">Export PDF</a>
+    </div>
+</body>
+</html>

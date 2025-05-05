@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Records</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tabs a {
+            padding: 10px 15px;
+            background-color: #ddd;
+            text-decoration: none;
+            border-radius: 8px;
+            color: black;
+        }
+        .tabs a.active {
+            background-color: #7b6039;
+            color: white;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: center;
+        }
+        .add-button {
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h2>Manage Records</h2>
+
+            <div class="tabs">
+                <a href="{{ url_for('attendance_page') }}" class="{{ 'active' if active_tab == 'attendance' else '' }}">Attendance</a>
+                <a href="{{ url_for('quiz_page') }}" class="{{ 'active' if active_tab == 'quiz' else '' }}">Quiz</a>
+                <a href="{{ url_for('exam_page') }}" class="{{ 'active' if active_tab == 'exam' else '' }}">Exam</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        {% if active_tab == 'attendance' %}
+                        <th>Attendance</th>
+                        {% elif active_tab == 'quiz' %}
+                        <th>Quiz Score</th>
+                        {% elif active_tab == 'exam' %}
+                        <th>Exam Score</th>
+                        {% endif %}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in records %}
+                        <tr>
+                            <td>{{ r.id }}</td>
+                            <td>{{ r.name }}</td>
+                            {% if active_tab == 'attendance' %}
+                            <td>{{ r.attendance }}</td>
+                            {% elif active_tab == 'quiz' %}
+                            <td>{{ r.quiz_score }}</td>
+                            {% elif active_tab == 'exam' %}
+                            <td>{{ r.exam_score }}</td>
+                            {% endif %}
+                            <td>
+                                <a href="{{ url_for('edit', student_id=r.id) }}">Edit</a> |
+                                <a href="{{ url_for('delete', student_id=r.id) }}">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <form action="{{ url_for('add_student') }}" method="post">
+                <button type="submit" class="add-button">+ Add Record</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

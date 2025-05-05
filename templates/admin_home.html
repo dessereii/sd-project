@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        
+        body {
+            background-color: #dbe9f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            background: white;
+            padding: 100px;
+            max-width: 600px;
+            margin: 100px auto;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: left;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 10;
+        }
+
+        p {
+            margin: 10px 0 40px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 200px;
+        }
+
+        .button-row form {
+            flex: 1;
+        }
+
+        .button-row button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            background-color: #7b6039;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .button-row button:hover {
+            background-color: #5a4429;
+        }
+        .logout-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.logout-button button {
+    background-color: #7b6039;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.logout-button button:hover {
+    background-color: #5a4429;
+}
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-box">
+            <h1>Welcome, {{ admin_name }}!</h1>
+            <p>You have successfully logged in.</p>
+
+
+            <div class="button-row">
+                <form action="{{ url_for('admin_dashboard') }}" method="get">
+                    <button type="submit">Attendance</button>
+                </form>
+                <form action="{{ url_for('quiz_page') }}" method="get">
+                    <button type="submit">Quiz</button>
+                </form>
+                <form action="{{ url_for('exam_page') }}" method="get">
+                    <button type="submit">Exam</button>
+                </form>
+                
+
+            </div>
+        </div>
+    </div>
+    <form action="{{ url_for('admin_logout') }}" method="get" class="logout-button">
+        <button type="submit">Logout</button>
+    </form> 
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard</title>
+    <style>
+        body {
+            background-color: #d0e4f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            position: relative;
+        }
+        .container {
+            background-color: white;
+            width: 50%;
+            margin: 80px auto 0;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .button {
+            background-color: #8B5E3C;
+            color: white;
+            padding: 12px 20px;
+            margin: 15px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #714B2F;
+        }
+        .bottom-left {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+        .bottom-right {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+        .center-buttons {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Manage Quiz</h1>
+    
+    <div class="center-buttons">
+        <button class="button" onclick="location.href='/student/assigned_quizzes'">Assigned Quizzes</button>
+        <button class="button" onclick="location.href='/student/view_records'">View Records</button>
+    </div>
+</div>
+
+<div class="bottom-left">
+    <button class="button" onclick="location.href='/home'">Back to Home</button>
+</div>
+
+<div class="bottom-right">
+    <button class="button" onclick="location.href='/student/export_student_quiz_csv'">Export CSV</button>
+    <button class="button" onclick="location.href='/student/export_student_quiz_pdf'">Export PDF</button>
+</div>
+
+</body>
+</html>

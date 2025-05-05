@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assign Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Assign a Quiz to a Student</h2>
+        <form method="POST" action="{{ url_for('assign_quiz') }}">
+            <label>Choose a Quiz:</label>
+            <select name="quiz_id" required>
+                {% for quiz in quizzes %}
+                    <option value="{{ quiz['id'] }}">{{ quiz['question'] }}</option>  
+                {% endfor %}
+            </select>
+
+            <label>Assign to Student:</label>
+            <select name="student_id" required>
+                {% for student_id in students %}
+                    <option value="{{ student_id }}">{{ student_id }}</option>  
+                {% endfor %}
+            </select>
+
+            <button type="submit">Assign</button>
+        </form>
+    </div>
+</body>
+</html>

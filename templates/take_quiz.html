@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Take Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        h1, h2 {
+            color: #875f3e;
+            margin-bottom: 25px;
+        }
+        
+        .button {
+            background: #875f3e;
+            color: white;
+            border: none;
+            padding: 12px 0;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        
+        .button:hover {
+            background: #875f3e;
+        }
+        
+        .footer-buttons {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .left-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .right-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .footer-button {
+            background: #875f3e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-button:hover {
+            background: #875f3e;
+        }
+        .quiz-box {
+            background: #fff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            width: 100%;
+            text-align: left;
+        }
+        
+        .quiz-box h3 {
+            color: #333;
+        }
+        
+        .quiz-box form {
+            margin-top: 10px;
+        }
+        
+        .quiz-box input[type="radio"] {
+            margin-right: 5px;
+        }
+        
+        .quiz-box button {
+            margin-top: 10px;
+            background: #875f3e;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .quiz-box button:hover {
+            background: #875f3e;
+        }
+        
+        .nav-buttons {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            background: #875f3e;
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        .nav-button:hover {
+            background: #875f3e;
+        }
+        
+        .back-button {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    {% if is_dashboard %}
+    <div class="container">
+        <h2>Take Quiz</h2>
+        <a href="{{ url_for('student_quiz', view='assigned') }}" class="button">View Assigned Quizzes</a>
+        <a href="{{ url_for('student_view_records') }}" class="button">View Records</a>
+        
+    </div>
+    
+    <div class="footer-buttons">
+        <div class="left-buttons">
+            <a href="{{ url_for('student_home') }}" class="footer-button">Back to Home</a>
+        </div>
+        <div class="right-buttons">
+            <a href="{{ url_for('export_student_quiz_csv') }}" class="footer-button">Export CSV</a>
+            <a href="{{ url_for('export_student_quiz_pdf') }}" class="footer-button">Export PDF</a>
+        </div>
+    </div>
+    
+    {% elif request.args.get('view') == 'assigned' %}
+    <h1>My Assigned Quizzes</h1>
+    
+    <div class="nav-buttons">
+        <a href="{{ url_for('student_quiz') }}" class="nav-button back-button">Back to Home</a>
+        <a href="{{ url_for('student_view_records') }}" class="nav-button">View Records</a>
+        <a href="{{ url_for('export_student_quiz_csv') }}" class="nav-button">Export CSV</a>
+        <a href="{{ url_for('export_student_quiz_pdf') }}" class="nav-button">Export PDF</a>
+    </div>
+    
+    {% if quizzes %}
+        {% for quiz in quizzes %}
+            <div class="quiz-box">
+                <h3>Question: {{ quiz['question'] }}</h3>
+                <form method="POST" action="{{ url_for('submit_quiz') }}">
+                    <input type="hidden" name="quiz_id" value="{{ quiz['id'] }}">
+                    {% if quiz['options'] %}
+                        {% set options = quiz['options'].split(';') %}
+                        {% for option in options %}
+                            <div>
+                                <input type="radio" name="answer" value="{{ option }}" required>
+                                {{ option }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <input type="text" name="answer" placeholder="Your answer" required>
+                    {% endif %}
+                    <br>
+                    <button type="submit">Submit Answer</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No quizzes assigned to you yet.</p>
+    {% endif %}
+    
+    {% else %}
+    <h1>Take Quiz</h1>
+    
+    <div class="nav-buttons">
+        <a href="{{ url_for('student_quiz', view='assigned') }}" class="nav-button back-button">Back to All Quizzes</a>
+    </div>
+    
+    <div class="quiz-box">
+        <h3>Question: {{ quiz['question'] }}</h3>
+        <form method="POST" action="{{ url_for('submit_quiz') }}">
+            <input type="hidden" name="quiz_id" value="{{ quiz['id'] }}">
+            {% if quiz['options'] %}
+                {% set options = quiz['options'].split(';') %}
+                {% for option in options %}
+                    <div>
+                        <input type="radio" name="answer" value="{{ option }}" required>
+                        {{ option }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <input type="text" name="answer" placeholder="Your answer" required>
+            {% endif %}
+            <br>
+            <button type="submit">Submit Answer</button>
+        </form>
+    </div>
+    {% endif %}
+</body>
+</html>

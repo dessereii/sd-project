@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Record</title>
+</head>
+<body>
+    <h1>Edit Student Record</h1>
+    <form action="{{ url_for('edit', student_id=record.id) }}" method="POST">
+        <input type="text" name="name" value="{{ record.name }}" required>
+        <input type="text" name="attendance" value="{{ record.attendance }}" required>
+        <input type="number" name="quiz_score" value="{{ record.quiz_score }}" required>
+        <input type="number" name="exam_score" value="{{ record.exam_score }}" required>
+        <button type="submit">Update Record</button>
+    </form>
+</body>
+</html>

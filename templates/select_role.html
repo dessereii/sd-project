@@ -1,0 +1,62 @@
+<html>
+<head>
+    <title>Select Role</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: white;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .role-box {
+            width: 380px;
+            text-align: center;
+            padding: 40px;
+            border: 1px solid #ccc;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        .role-box h2 {
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        .role-box a {
+            display: block;
+            margin: 12px 0;
+            padding: 12px 30px;
+            background-color: #7b6039;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .role-box a:hover {
+            background-color: #5e4a2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="role-box">
+            <h2>Select Your Role</h2>
+            <a href="{{ url_for('student_login') }}">I'm a Student</a>
+            <a href="{{ url_for('admin_login') }}">I'm an Admin</a>
+        </div>
+    </div>
+</body>
+</html>
